@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1092IV - Final</title>
+
+  <!-- JS Libraries -->
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="http://vizjs.org/viz.v1.1.0.min.js"></script>
+
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+  <!-- custom style files -->
+  <link rel="stylesheet" href="index.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container-fluid pt-5">
+    <div id="top-bar" class="mb-5">
+      <h1>Netflix</h1>
+      <h2 class="mb-3">Movie Recommendation Visualization</h2>
+      <div class="btn-toolbar justify-content-center" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="input-group">
+          <input
+            id="search_words" type="text" class="form-control"
+            placeholder="Search For Movies..."
+            aria-label="Search For Movies..."
+            aria-describedby="button-addon2">
+          <div class="input-group-append">
+            <button
+              class="btn btn-secondary" type="submit"
+              onclick="updateData()">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+        <button type="button" class="btn btn-secondary ml-2" onclick="searchGoogle()">Search On Google</button>
+        <button type="button" class="btn btn-secondary ml-2" onclick="window.open('movielist.html');">Movie List</button>
+      </div>
+    </div>
+    <div id="main-wrapper" class="row my-5">
+      <div class="col-9">
+        <h3 class="text-center mb-3">Movie Relationship bipartite Graph</h3>
+        <svg id="bipartite" width="100%" height="1210"></svg>
+      </div>
+      <div class="col-3">
+        <div class="row">
+          <div id="metadata" class="col-12">
+            <h2 id="metadata-title">The Dark Knight</h2>
+            <h5 id="metadata-director">by: Christopher Nolan</h5>
+            <p><span id="metadata-country">Canada</span> | <span id="metadata-year">2020</span> | <span id="metadata-genre">Drama,
+                Romance</span> | <span id="metadata-duration">130min.</span></p>
+            <p id="metadata-cast" style="font-weight: 300; font-size: .75rem;">Cast</p>
+            <p id="metadata-desc" style="margin-bottom: 0;">Description</p>
+          </div>
+          <div class="col-12 mt-5">
+            <h3 class="text-center mb-3">Movie Rate Distribution</h3>
+            <svg id="rating" width="100%"></svg>
+            <h5 class="text-center">Average: <span id="rating-ave">0.00</span> / 5.0, <span id="rating-views">000</span> Views</h5>
+          </div>
+          <div class="col-12 mt-5">
+            <h3 class="text-center mb-3">Movie Recommendation</h3>
+            <table id="related" class="table table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">Related 10 Movies</th>
+                  <th scope="col" style="width: 100px;">Pearson's R</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- <tr>
+                          <th scope="row">Lost in Translation</th>
+                          <td>1.0</td>
+                        </tr> -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="bottom-bar" class="py-5">
+    <div class="container">
+      <h3 class="mb-3">圖表說明</h3>
+      <p>主要的圖為頁面左邊的電影推薦二分圖，二分圖的左半部分為搜尋電影之相關十部電影，右半部分則為左半部所有電影的相關前五部電影列出，左邊%數代表此電影和此相關五部電影與搜尋電影的相關度，右邊的%數則代表該電影與搜尋電影的相關度，透過二分圖除了可以知道推薦的前十部電影之外，還可以向外再拓展一層關係，使用者在搜尋時可以有更多的選擇。
+      右上角為電影表資訊表，當中列出電影名稱、年份、時長、拍攝國家、導演、演員、以及簡短的電影介紹，因為資料並不齊全，如出現資訊unknown的時候，可以透過search on google得到介紹。
+      右邊中間為電影評價的分佈長條圖，呈現出觀看的人給予的評價分佈（1-5），在長條圖底下，我們也計算出電影的平均得分及觀看次數，使用者可以透過此圖去了解這部電影所獲得的分數及其分佈。
+      右下角為電影推薦表，列表中列出和搜尋電影相關的前十部電影並列出其相關度，使用者可以透過此列表了解量化過的相關度，並從中去挑選可能有興趣的電影。</p>
+    </div>
+  </div>
+  <!-- Extra JS Libraries -->
+  <script src="https://kit.fontawesome.com/0532c76427.js" crossorigin="anonymous"></script>
+
+  <!-- custom JS Scripts -->
+  <script src="movie_output.js"></script>
+  <script src="tableData.js"></script>
+  <script src="movie.js"></script>
+  <script src="data.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
