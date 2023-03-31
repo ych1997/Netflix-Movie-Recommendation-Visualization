@@ -4,7 +4,7 @@
 組員：109753103 賴雅鈴、109753107 黃亦晨、110753108 林瀚軒、110753110 邱顯安
 
 
-![image](https://github.com/ych1997/Netflix-Movie-Recommendation-Visualization/blob/main/image/%E5%9C%96%E7%89%876.png)
+![image](https://github.com/ych1997/Netflix-Movie-Recommendation-Visualization/blob/main/image/圖片7.png)
 
 ## 1. 介紹:
 
